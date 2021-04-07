@@ -1,5 +1,3 @@
-#initializing 3 different Lists
-
 #black 1 white 2 in array
 #          1 2 3 4 5 6 7 8 9   
 row0 =  [3,3,3,3,3,3,3,3,3,3,3] #
@@ -14,12 +12,11 @@ row8 =  [3,0,0,0,0,0,0,0,0,0,3] #72
 row9 =  [3,0,0,0,0,0,0,0,0,0,3] #81
 row10 = [3,3,3,3,3,3,3,3,3,3,3]
 
-col = [row0, row1, row2, row3, row4, row5, row6, row7, row8, row9, row10]
+myList = [row0, row1, row2, row3, row4, row5, row6, row7, row8, row9, row10]
 
-checked2 = []
+checked = []
 
-# colour is the colour you're trying to capture, xloc, yloc of added piece
-def pieceCaptured(x,y,checked,myList = [], *args):
+def pieceCaptured(x,y):
     
     colour = myList[y][x]
  
@@ -41,13 +38,13 @@ def pieceCaptured(x,y,checked,myList = [], *args):
            # if it is the same
             if ((y+ydir[i])*9-9+(x+xdir[i])) not in checked:
                 # if we have not checked it yet
-                if pieceCaptured(x+xdir[i],y+ydir[i],checked,myList) == "empty":
+                if pieceCaptured(x+xdir[i],y+ydir[i]) == "empty":
                     checked.clear()
                     return("empty")
 
     return(checked)
 
-def addPiece(location, colour ,myList = [], *args):
+def addPiece(location, colour):
     loc_float = float(location)
     loc_x = int(loc_float)
     loc_y = int((loc_float - loc_x) * 10.1)
@@ -55,7 +52,7 @@ def addPiece(location, colour ,myList = [], *args):
     myList[loc_y][loc_x] = colour
     print(myList)
 
-def removePiece(location ,myList = [], *args):
+def removePiece(location):
     loc_float = float(location)
     loc_x = int(loc_float)
     loc_y1 = ((loc_float - loc_x) * 10.1)
@@ -64,8 +61,7 @@ def removePiece(location ,myList = [], *args):
     myList[loc_y][loc_x] = 0
    # print(myList[loc_y][loc_x])
 
-def checkPeice(loc,checked,myList = [], *args):
-
+def checkPeice(loc):
     loc_float = float(loc)
     x = int(loc_float)
     yf = ((loc_float-x)*10.1)
@@ -87,7 +83,7 @@ def checkPeice(loc,checked,myList = [], *args):
             pass
         else:
             #check if the pieces need to be removed sourounding this piece
-            piecesNeedRemoved = pieceCaptured(x+xdir[i],y+ydir[i], checked, myList)
+            piecesNeedRemoved = pieceCaptured(x+xdir[i],y+ydir[i])
             if piecesNeedRemoved == (None or 'empty'):
                 pass
             else:
@@ -96,12 +92,12 @@ def checkPeice(loc,checked,myList = [], *args):
                      yloc = int((j-1)/9+1)
                      xloc = (int(((j-1)/9+1-yloc)*10))+1
                      formatPiece = str(xloc) + "." + str(yloc)
-                     removePiece(formatPiece, myList)
+                     removePiece(formatPiece)
                      formatPiece = "R" + formatPiece
                      PiecestobeRemoved = PiecestobeRemoved + formatPiece
     
     #check if the piece that was added needs to be removed
-    thisPieceRemoved = pieceCaptured(x,y,checked,myList)
+    thisPieceRemoved = pieceCaptured(x,y)
     if thisPieceRemoved == (None or 'empty'):
         pass
     else:
@@ -109,28 +105,8 @@ def checkPeice(loc,checked,myList = [], *args):
             yloc = int((j-1)/9+1)
             xloc = (int(((j-1)/9+1-yloc)*10))+1
             formatPiece = str(xloc) + "." + str(yloc)
-            removePiece(formatPiece, myList)
+            removePiece(formatPiece)
             formatPiece = "R" +formatPiece
             PiecestobeRemoved = PiecestobeRemoved + formatPiece
 
-
     return(PiecestobeRemoved)
-
-
-#print(pieceCaptured(5,5,col))
-addPiece("9.1",1, col)
-# addPiece("5.4",1, col)
-# addPiece("1.1",2, col)
-# addPiece("5.6",1, col)
-# addPiece("1.2",2, col)
-# addPiece("6.5",1, col)
-# addPiece("1.3",2, col)
-# addPiece("4.5",1, col)
-print(checkPeice("9.1",checked2,col))
-
-# addPiece("1.4",2, col)
-# addPiece("1.5",1, col)
-
-# #removePiece("1.9",col)
-# print(checkPeice("9.9",checked2,col))
-# print(col)

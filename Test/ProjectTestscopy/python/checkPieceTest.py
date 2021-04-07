@@ -21,10 +21,7 @@ checked = []
 # colour is the colour you're trying to capture, xloc, yloc of added piece
 def pieceCaptured(x,y,myList = [], *args):
     
-    colour = 2
-
-    if (myList[y][x] - 1) == 0:
-        colour = 1
+    colour = myList[y][x]
  
     checked.append(y*9-9+x)
     
@@ -71,14 +68,11 @@ def checkPeice(x,y,myList = [], *args):
 
     count = [0,1,2,3]
 
+    #arrays to add to x and y direction
     xdir = [1,-1,0,0]
     ydir = [0,0,1,-1]
     
-    colour = 2
-
-    if (myList[y][x] - 1) == 0:
-        colour = 1
-    
+    colour = myList[y][x]
 
     for i in count:
 
@@ -87,16 +81,19 @@ def checkPeice(x,y,myList = [], *args):
         elif myList[y+ydir[i]][x+xdir[i]] == 0:
             pass
         else:
+            #check if the pieces need to be removed sourounding this piece
             piecesNeedRemoved = pieceCaptured(x+xdir[i],y+ydir[i], myList)
             if piecesNeedRemoved == (None or 'empty'):
                 pass
             else:
                 for j in piecesNeedRemoved:
+                    #if rgw do need to be removed get into proper format and then remove piece
                      yloc = int((j-1)/9+1)
                      xloc = (int(((j-1)/9+1-yloc)*10))+1
                      formatPeice = str(xloc) + "." + str(yloc)
                      removePiece(formatPeice, myList)
     
+    #check if the piece that was added needs to be removed
     thisPieceRemoved = pieceCaptured(x,y,myList)
     if thisPieceRemoved == (None or 'empty'):
         pass
