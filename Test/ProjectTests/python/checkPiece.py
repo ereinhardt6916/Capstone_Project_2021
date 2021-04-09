@@ -16,6 +16,20 @@ myList = [row0, row1, row2, row3, row4, row5, row6, row7, row8, row9, row10]
 
 checked = []
 
+def finalScore():
+    whiteScore = 7
+    blackScore = 0
+
+    for x in range(11):
+        for y in range(11):
+            if myList[y][x] == 1:
+                blackScore += 1
+            elif myList[y][x] == 2:
+                whiteScore += 1
+    print("Black:" + str(blackScore) + " White:"+ str(whiteScore))
+    return ([blackScore, whiteScore])
+
+
 def pieceCaptured(x,y):
     
     colour = myList[y][x]

@@ -3,20 +3,35 @@
 #black 1 white 2 in array
 #          1 2 3 4 5 6 7 8 9   
 row0 =  [3,3,3,3,3,3,3,3,3,3,3] #
-row1 =  [3,0,0,0,0,0,0,0,0,0,3] #9
+row1 =  [3,2,0,0,0,0,0,0,0,2,3] #9
 row2 =  [3,0,0,0,0,0,0,0,0,0,3] #18
 row3 =  [3,0,0,0,0,0,0,0,0,0,3] #27
-row4 =  [3,0,0,0,0,0,0,0,0,0,3] #36
+row4 =  [3,0,0,1,2,1,2,0,0,0,3] #36
 row5 =  [3,0,0,0,0,0,0,0,0,0,3] #45
-row6 =  [3,0,0,0,0,0,0,0,0,0,3] #54
+row6 =  [3,0,0,0,0,2,0,0,0,0,3] #54
 row7 =  [3,0,0,0,0,0,0,0,0,0,3] #63
-row8 =  [3,0,0,0,0,0,0,0,0,0,3] #72
-row9 =  [3,0,0,0,0,0,0,0,0,0,3] #81
+row8 =  [3,0,0,0,0,1,1,1,1,0,3] #72
+row9 =  [3,2,0,0,0,0,0,0,0,2,3] #81
 row10 = [3,3,3,3,3,3,3,3,3,3,3]
 
 col = [row0, row1, row2, row3, row4, row5, row6, row7, row8, row9, row10]
 
-checked2 = []
+checked1 = []
+
+def finalScore(myList=[], *args):
+    whiteScore = 7
+    blackScore = 0
+
+    for x in range(11):
+        for y in range(11):
+            if col[y][x] == 1:
+                blackScore += 1
+            elif col[y][x] == 2:
+                whiteScore += 1
+    print("Black:" + str(blackScore) + " White:"+ str(whiteScore))
+    return ([blackScore, whiteScore])
+
+
 
 # colour is the colour you're trying to capture, xloc, yloc of added piece
 def pieceCaptured(x,y,checked,myList = [], *args):
@@ -118,7 +133,7 @@ def checkPeice(loc,checked,myList = [], *args):
 
 
 #print(pieceCaptured(5,5,col))
-addPiece("9.1",1, col)
+#addPiece("9.1",1, col)
 # addPiece("5.4",1, col)
 # addPiece("1.1",2, col)
 # addPiece("5.6",1, col)
@@ -126,7 +141,7 @@ addPiece("9.1",1, col)
 # addPiece("6.5",1, col)
 # addPiece("1.3",2, col)
 # addPiece("4.5",1, col)
-print(checkPeice("9.1",checked2,col))
+#print(checkPeice("9.1",checked1,col))
 
 # addPiece("1.4",2, col)
 # addPiece("1.5",1, col)
@@ -134,3 +149,5 @@ print(checkPeice("9.1",checked2,col))
 # #removePiece("1.9",col)
 # print(checkPeice("9.9",checked2,col))
 # print(col)
+
+print (finalScore(col))
