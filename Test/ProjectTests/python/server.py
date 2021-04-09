@@ -12,8 +12,7 @@ port2 = 10236
 host1 = "localhost"
 host2 = "localhost"
 
-WhiteScore = 7
-BlackScore = 0
+
 
 
 
@@ -32,10 +31,10 @@ player1colour = startup(socket1, socket2)
 while True:
 
     if player1colour == b"Blac":
-        if player1first(socket1, socket2, b"W001B050") == "end":
+        if player1first(socket1, socket2) == "end":
             break
     else:
-        if player2first(socket1, socket2, b"W001B050") == "end":
+        if player2first(socket1, socket2) == "end":
             break
 
 socket1.close_socket
